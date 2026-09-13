@@ -3,17 +3,18 @@ using System.Collections.Generic;
 
 public class ArbolABB<T> where T : IComparable<T>
 {
-    public Nodo<T> Raiz { get; private set; }
+    public NodoABB<T> Raiz { get; private set; }
 
+   
     public void Insertar(T valor)
     {
         Raiz = InsertarRec(Raiz, valor);
     }
 
-    private Nodo<T> InsertarRec(Nodo<T> nodo, T valor)
+    private NodoABB<T> InsertarRec(NodoABB<T> nodo, T valor)
     {
         if (nodo == null)
-            return new Nodo<T>(valor);
+            return new NodoABB<T>(valor);
 
         int comparacion = valor.CompareTo(nodo.Valor);
         if (comparacion < 0)
@@ -23,7 +24,9 @@ public class ArbolABB<T> where T : IComparable<T>
 
         return nodo;
     }
-        public bool Buscar(T valor)
+
+   
+    public bool Buscar(T valor)
     {
         return BuscarRec(Raiz, valor);
     }
@@ -34,11 +37,15 @@ public class ArbolABB<T> where T : IComparable<T>
 
         int comparacion = valor.CompareTo(nodo.Valor);
         if (comparacion == 0) return true;
-           if(comparacion < 0)
-                return BuscarRec(nodo.Izquierdo, valor);
-            else
-                return BuscarRec(nodo.Derecho, valor);
-        public void Eliminar(T valor)
+
+        if (comparacion < 0)
+            return BuscarRec(nodo.Izquierdo, valor);
+        else
+            return BuscarRec(nodo.Derecho, valor);
+    }
+
+   
+    public void Eliminar(T valor)
     {
         Raiz = EliminarRec(Raiz, valor);
     }
@@ -48,19 +55,29 @@ public class ArbolABB<T> where T : IComparable<T>
         if (nodo == null) return null;
 
         int comparacion = valor.CompareTo(nodo.Valor);
+
         if (comparacion < 0)
+        {
             nodo.Izquierdo = EliminarRec(nodo.Izquierdo, valor);
+        }
         else if (comparacion > 0)
+        {
             nodo.Derecho = EliminarRec(nodo.Derecho, valor);
+        }
         else
         {
+            // Caso 1: nodo sin hijo izquierdo
             if (nodo.Izquierdo == null) return nodo.Derecho;
+
+            // Caso 2: nodo sin hijo derecho
             if (nodo.Derecho == null) return nodo.Izquierdo;
 
+            // Caso 3: nodo con dos hijos -> buscar sucesor (el mínimo del subárbol derecho)
             NodoABB<T> sucesor = ObtenerMinimo(nodo.Derecho);
             nodo.Valor = sucesor.Valor;
             nodo.Derecho = EliminarRec(nodo.Derecho, sucesor.Valor);
         }
+
         return nodo;
     }
 
@@ -70,19 +87,20 @@ public class ArbolABB<T> where T : IComparable<T>
             nodo = nodo.Izquierdo;
         return nodo;
     }
-    public List<T> RecorridoInOrden()
+
+  
+    public List<T> RecorridoInOrder()
     {
         List<T> resultado = new List<T>();
-        RecorridoInOrdenRec(Raiz, resultado);
+        InOrderRec(Raiz, resultado);
         return resultado;
     }
-    private void RecorridoInOrdenRec(NodoABB<T> nodo, List<T> resultado)
+
+    private void InOrderRec(NodoABB<T> nodo, List<T> resultado)
     {
-        if (nodo != null)
-        {
-            RecorridoInOrdenRec(nodo.Izquierdo, resultado);
-            resultado.Add(nodo.Valor);
-            RecorridoInOrdenRec(nodo.Derecho, resultado);
-        }
+        if (nodo == null) return;
+        InOrderRec(nodo.Izquierdo, resultado);
+        resultado.Add(nodo.Valor);
+        InOrderRec(nodo.Derecho, resultado);
     }
 }
