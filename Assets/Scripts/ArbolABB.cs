@@ -70,4 +70,19 @@ public class ArbolABB<T> where T : IComparable<T>
             nodo = nodo.Izquierdo;
         return nodo;
     }
+    public List<T> RecorridoInOrden()
+    {
+        List<T> resultado = new List<T>();
+        RecorridoInOrdenRec(Raiz, resultado);
+        return resultado;
+    }
+    private void RecorridoInOrdenRec(NodoABB<T> nodo, List<T> resultado)
+    {
+        if (nodo != null)
+        {
+            RecorridoInOrdenRec(nodo.Izquierdo, resultado);
+            resultado.Add(nodo.Valor);
+            RecorridoInOrdenRec(nodo.Derecho, resultado);
+        }
+    }
 }
