@@ -1,12 +1,13 @@
-Public class Nodo{
-    public int valor;
-    Public Nodo izquierda;
-    public Nodo derecha;
+using System;
 
-    public Nodo(int valor){
-        this.valor=valor;
-        izquierda = null;
-        derecha=null;
+public class NodoABB<T> where T : IComparable<T>
+{
+    public T Valor;
+    public NodoABB<T> Izquierdo;
+    public NodoABB<T> Derecho;
+
+    public NodoABB(T valor)
+    {
+        Valor = valor;
     }
-    
 }
