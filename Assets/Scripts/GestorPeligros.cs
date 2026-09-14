@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GestorPeligros : MonoBehaviour
 {
-    private ArbolBinarioBusqueda<PeligroData> arbolPeligros = new ArbolBinarioBusqueda<PeligroData>();
+    private ArboABB<PeligroData> arbolPeligros = new ArbolABB<PeligroData>();
 
     void Start()
     {
