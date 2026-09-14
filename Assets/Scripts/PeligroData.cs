@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
-public class PeligroData : incomparable<PeligroData>
-{
+public class PeligroData : IComparable<PeligroData>{
     public string nombre;
     public int nivelPeligro;
 
