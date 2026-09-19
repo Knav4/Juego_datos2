@@ -1,0 +1,29 @@
+# Carpetas temporales generadas por Unity 
+/[L|l]ibrary/
+/[T|t]emp/
+/[O|o]bj/
+/[B|b]uild/
+/[B|b]uilds/
+/[L|l]ogs/
+/[U|u]ser[S|s]ettings/
+/[M|m]emoryCaptures/
+
+# Archivos de la solución y del IDE (Visual Studio / Rider / VS Code)
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+.vs/
+.idea/
+.vscode/
+
+# Build de Gradle en Android (si compilas para móviles)
+.gradle/
